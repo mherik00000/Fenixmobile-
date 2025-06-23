@@ -2,291 +2,284 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fenix Mobile - Скачать лаунчер</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ObzvonPro</title>
   <style>
-    /* Базовые стили и фон */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-      overflow-x: hidden;
-      animation: bgmove 60s linear infinite;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f0f1a;
+      color: #ffffff;
     }
-    @keyframes bgmove {
-      0% { background-position: center top; }
-      50% { background-position: center center; }
-      100% { background-position: center top; }
-    }
-    .overlay {
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(4px);
-      z-index: 1;
-    }
-
-    /* Хедер с гамбургером */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 60px;
-      background: rgba(0,0,0,0.7);
+      background-color: #1a1a2e;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      color: #67c6ff;
+    }
+    nav {
       display: flex;
-      align-items: center;
-      padding: 0 20px;
-      z-index: 20;
-      justify-content: flex-start;
+      justify-content: center;
+      gap: 2rem;
+      background-color: #121225;
+      padding: 1rem 0;
     }
-    .hamburger {
-      width: 30px;
-      height: 22px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .hamburger span {
-      display: block;
-      height: 4px;
-      background: #ff4f00;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    /* При открытом меню гамбургер меняется */
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Боковое меню */
-    nav.sidebar {
-      position: fixed;
-      top: 60px; left: 0;
-      width: 220px;
-      height: calc(100% - 60px);
-      background: rgba(30, 30, 30, 0.95);
-      box-shadow: 2px 0 10px rgba(0,0,0,0.7);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 15;
-      padding-top: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-    nav.sidebar.open {
-      transform: translateX(0);
-    }
-    nav.sidebar a {
-      color: #ff4f00;
+    nav a {
+      color: #a8a8ff;
       text-decoration: none;
-      font-size: 18px;
-      padding: 10px 20px;
-      transition: background 0.2s;
-      font-weight: 600;
+      font-weight: bold;
+      cursor: pointer;
     }
-    nav.sidebar a:hover {
-      background: #ff4f00;
-      color: black;
-      border-radius: 6px;
-    }
-
-    /* Контент основной */
-    main.content {
-      position: relative;
-      padding: 80px 20px 140px; /* сверху 80, снизу 140 для кнопки и соцсетей */
+    .container {
       max-width: 800px;
-      margin: 0 auto;
-      z-index: 5;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #1f1f2e;
+      border-radius: 10px;
     }
-    main.content h1 {
-      font-size: 40px;
-      color: #ff4f00;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    main.content p {
-      font-size: 18px;
-      line-height: 1.5;
-      color: #ddd;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    /* Секция описания с иконками */
-    .info-section {
-      display: flex;
-      justify-content: space-around;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 60px;
-    }
-    .info-block {
-      background: rgba(40,40,40,0.7);
-      border-radius: 12px;
-      flex: 1 1 200px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 79, 0, 0.6);
-    }
-    .info-block h3 {
-      color: #ff4f00;
-      margin-bottom: 15px;
-    }
-    .info-block p {
-      color: #eee;
-      font-size: 16px;
-    }
-    /* Иконки для блоков */
-    .info-block .icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-      color: #ff4f00;
-    }
-
-    /* Кнопка скачать лаунчер */
-    .download-btn {
-      position: fixed;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff4f00;
-      color: white;
-      font-weight: 700;
-      font-size: 20px;
-      padding: 16px 50px;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 0 15px #ff4f00aa;
+    button {
+      background-color: #00bcd4;
       border: none;
-      z-index: 10;
-      transition: background 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .download-btn:hover {
-      background: #e84118;
-      box-shadow: 0 0 20px #e84118cc;
+    input {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: none;
+      width: 100%;
     }
-
-    /* Нижний футер с соцсетями */
-    footer.socials {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 25px;
-      z-index: 10;
-    }
-    footer.socials a {
-      color: #ff4f00;
-      font-size: 30px;
-      transition: color 0.3s;
-    }
-    footer.socials a:hover {
-      color: #e84118;
-    }
-
-    /* Иконки SVG (Discord, Telegram) */
-    /* Добавлю их прямо в html */
-    
-    /* Адаптив */
-    @media (max-width: 600px) {
-      main.content h1 {
-        font-size: 28px;
-      }
-      .info-section {
-        flex-direction: column;
-        gap: 30px;
-      }
-      .download-btn {
-        padding: 14px 40px;
-        font-size: 18px;
-      }
-      footer.socials {
-        gap: 20px;
-      }
-    }
+    .hidden { display: none; }
+    .profile, .store, .admin-panel, .requests-panel { margin-top: 2rem; }
+    .item { margin: 1rem 0; padding: 1rem; background: #2a2a3f; border-radius: 8px; }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-
   <header>
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <h1>ObzvonPro</h1>
   </header>
-
-  <nav class="sidebar" id="sidebar">
-    <a href="account.html">Личный кабинет</a>
-    <a href="#news">Новости</a>
+  <nav>
+    <a onclick="showPage('main')">Главная</a>
+    <a onclick="showPage('store')">Магазин</a>
+    <a onclick="showPage('register')">Регистрация</a>
+    <a id="adminNav" class="hidden" onclick="showPage('admin')">Админ-панель</a>
+    <a id="requestsNav" class="hidden" onclick="showPage('requests')">Заявки</a>
   </nav>
-
-  <main class="content">
-    <h1>Fenix Mobile</h1>
-    <p>Добро пожаловать в лучший CRMP-проект для телефона и ПК! Скачайте лаунчер и присоединяйтесь к игре.</p>
-
-    <div class="info-section">
-      <div class="info-block">
-        <div class="icon">💰</div>
-        <h3>Донат</h3>
-        <p>Поддержи проект и получи уникальные бонусы, скины и авто.</p>
-      </div>
-      <div class="info-block">
-        <div class="icon">📰</div>
-        <h3>Новости</h3>
-        <p>Следи за обновлениями, новыми фракциями и событиями.</p>
-      </div>
-      <div class="info-block">
-        <div class="icon">ℹ️</div>
-        <h3>О нас</h3>
-        <p>Команда разработчиков, стремящихся сделать лучший проект.</p>
-      </div>
+  <div class="container" id="main">
+    <h2>Добро пожаловать в ObzvonPro</h2>
+    <p>Поддержка и прохождение обзвонов в Grand Mobile.</p>
+    <div id="profile" class="profile hidden">
+      <h3>Профиль</h3>
+      <p><strong>Имя:</strong> <span id="userName"></span></p>
+      <p><strong>ID:</strong> <span id="userId"></span></p>
+      <p><strong>Баланс:</strong> <span id="userCoins"></span> коинов</p>
+      <p><strong>Уровень Админа:</strong> <span id="userLevel"></span></p>
     </div>
-  </main>
+  </div>
+  <div class="container hidden" id="register">
+    <h2>Регистрация</h2>
+    <input type="text" id="regName" placeholder="Имя" />
+    <input type="text" id="regId" placeholder="ID" />
+    <button onclick="registerUser()">Зарегистрироваться</button>
+  </div>
+  <div class="container hidden" id="store">
+    <h2>Магазин</h2>
+    <div class="item">
+      <p>Обзвон на ЛД — <strong>120 коинов</strong></p>
+      <button onclick="openRequestForm(120, 'Обзвон на ЛД')">Купить</button>
+    </div>
+    <div class="item">
+      <p>Обзвон на СС — <strong>100 коинов</strong></p>
+      <button onclick="openRequestForm(100, 'Обзвон на СС')">Купить</button>
+    </div>
+    <div class="item">
+      <p>Обзвон на АДМ — <strong>80 коинов</strong></p>
+      <button onclick="openRequestForm(80, 'Обзвон на АДМ')">Купить</button>
+    </div>
+    <div id="requestForm" class="hidden">
+      <h3>Заполните данные</h3>
+      <input type="text" id="nick" placeholder="Ваш ник" />
+      <input type="text" id="server" placeholder="Сервер" />
+      <input type="text" id="contact" placeholder="Discord или Telegram" />
+      <button onclick="submitRequest()">Отправить заявку</button>
+    </div>
+  </div>
+  <div class="container hidden" id="admin">
+    <h2>Админ-панель</h2>
+    <input type="text" id="targetId" placeholder="ID пользователя" />
+    <input type="number" id="amount" placeholder="Сколько коинов выдать" />
+    <button onclick="addCoins()">Выдать коины</button>
+    <br /><br />
+    <input type="text" id="banId" placeholder="ID для бана" />
+    <button onclick="banUser()">Выдать бан</button>
+    <br /><br />
+    <input type="text" id="muteId" placeholder="ID для мута" />
+    <button onclick="muteUser()">Выдать мут</button>
+    <br /><br />
+    <input type="text" id="adminLevelId" placeholder="ID пользователя для повышения" />
+    <input type="number" id="newAdminLevel" placeholder="Уровень 1-4" />
+    <button onclick="grantAdminLevel()">Выдать уровень админа</button>
 
-  <a href="https://yourlauncherdownloadlink.com/launcher.apk" class="download-btn" target="_blank" rel="noopener noreferrer">Скачать лаунчер</a>
-
-  <footer class="socials">
-    <a href="https://discord.gg/JtfKAhNh" target="_blank" rel="noopener noreferrer" title="Discord">
-      <!-- Discord SVG -->
-      <svg width="30" height="30" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#FF4F00" d="M60.104 4.686a58.642 58.642 0 00-14.3-4.453.21.21 0 00-.223.105c-.617 1.073-1.31 2.473-1.797 3.56a55.27 55.27 0 00-16.59 0c-.49-1.088-1.18-2.486-1.798-3.56a.225.225 0 00-.223-.105c-4.65 1.33-8.872 3.3-12.62 5.954-5.49 7.66-7.1 15.16-6.324 22.58a54.164 54.164 0 0016.262 8.28 40.793 40.793 0 003.056-4.957c-1.514-.45-3.027-.997-4.408-1.66a43.447 43.447 0 003.633 1.73 38.94 38.94 0 0015.59 0 44.497 44.497 0 003.634-1.73 31.62 31.62 0 01-4.41 1.66 40.847 40.847 0 003.06 4.957 54.013 54.013 0 0016.262-8.28c.767-7.42-.832-14.92-6.318-22.58zm-34.28 23.29c-2.3 0-4.18-2.1-4.18-4.7 0-2.6 1.87-4.7 4.18-4.7 2.33 0 4.21 2.1 4.18 4.7 0 2.6-1.85 4.7-4.18 4.7zm22.47 0c-2.3 0-4.18-2.1-4.18-4.7 0-2.6 1.87-4.7 4.18-4.7 2.33 0 4.21 2.1 4.18 4.7 0 2.6-1.85 4.7-4.18 4.7z"/>
-      </svg>
-    </a>
-    <a href="https://t.me/yourtelegram" target="_blank" rel="noopener noreferrer" title="Telegram" style="color:#0088cc;">
-      <!-- Telegram SVG -->
-      <svg width="30" height="30" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#FF4F00" d="M120 0c-66.274 0-120 53.726-120 120s53.726 120 120 120 120-53.726 120-120S186.274 0 120 0zm57.322 81.596l-15.23 72.17c-1.154 5.04-4.18 6.283-8.462 3.93l-23.383-17.26-11.28 10.85c-1.246 1.246-2.28 2.28-4.67 2.28l1.676-23.38 42.527-38.445c1.846-1.675-.4-2.618-2.86-1.15l-52.67 33.09-22.65-7.06c-4.917-1.53-5-4.917 1.034-7.26l88.532-34.123c4.08-1.53 7.65 1 6.21 7.12z"/>
-      </svg>
-    </a>
-  </footer>
-
+    <hr style="margin: 2rem 0; border-color: #444;" />
+    <h3>Поиск ID по нику</h3>
+    <input type="text" id="searchNick" placeholder="Введите ник для поиска" />
+    <button onclick="findIdByNick()">Найти ID</button>
+    <p id="searchResult" style="margin-top:1rem; font-weight: bold;"></p>
+  </div>
+  <div class="container hidden" id="requests">
+    <h2>Заявки от пользователей</h2>
+    <ul id="requestsList"></ul>
+  </div>
   <script>
-    // Открытие/закрытие бокового меню при клике на гамбургер
-    const hamburger = document.getElementById('hamburger');
-    const sidebar = document.getElementById('sidebar');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      sidebar.classList.toggle('open');
-    });
+    let users = JSON.parse(localStorage.getItem('users') || '{}');
+    let currentUser = localStorage.getItem('currentUser');
+    let bannedUsers = new Set();
+    let mutedUsers = new Set();
+    let pendingRequests = [];
+    let selectedRequest = null;
+
+    function save() {
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('currentUser', currentUser);
+    }
+
+    function showPage(page) {
+      document.querySelectorAll('.container').forEach((el) =>
+        el.classList.add('hidden')
+      );
+      document.getElementById(page).classList.remove('hidden');
+      if (page === 'main') updateProfile();
+      if (page === 'requests') loadRequests();
+    }
+
+    function registerUser() {
+      const name = document.getElementById('regName').value.trim();
+      const id = document.getElementById('regId').value.trim();
+      if (!name || !id) return alert('Заполните все поля');
+      if (users[id]) return alert('Пользователь уже существует');
+      users[id] = { name: name, coins: 0, adminLevel: name === 'Mher' ? 5 : 0 };
+      currentUser = id;
+      save();
+      alert('Регистрация успешна');
+      showPage('main');
+    }
+
+    function updateProfile() {
+      if (!currentUser || !users[currentUser])
+        return document.getElementById('profile').classList.add('hidden');
+      const u = users[currentUser];
+      document.getElementById('userName').textContent = u.name;
+      document.getElementById('userId').textContent = currentUser;
+      document.getElementById('userCoins').textContent = u.coins;
+      document.getElementById('userLevel').textContent = u.adminLevel || 0;
+      document.getElementById('profile').classList.remove('hidden');
+      if (u.adminLevel >= 1) document.getElementById('adminNav').classList.remove('hidden');
+      if (u.adminLevel >= 5) document.getElementById('requestsNav').classList.remove('hidden');
+    }
+
+    function addCoins() {
+      const id = document.getElementById('targetId').value.trim();
+      const amount = parseInt(document.getElementById('amount').value);
+      if (!users[id]) return alert('Пользователь не найден');
+      if (isNaN(amount)) return alert('Неверное количество');
+      users[id].coins += amount;
+      if (currentUser === id) updateProfile();
+      save();
+      alert(`Выдано ${amount} коинов пользователю ${users[id].name}`);
+    }
+
+    function banUser() {
+      const id = document.getElementById('banId').value.trim();
+      if (!users[id]) return alert('Пользователь не найден');
+      bannedUsers.add(id);
+      alert('Пользователь забанен');
+    }
+
+    function muteUser() {
+      const id = document.getElementById('muteId').value.trim();
+      if (!users[id]) return alert('Пользователь не найден');
+      mutedUsers.add(id);
+      alert('Пользователь получил мут');
+    }
+
+    function grantAdminLevel() {
+      const id = document.getElementById('adminLevelId').value.trim();
+      const level = parseInt(document.getElementById('newAdminLevel').value);
+      if (!users[id]) return alert('Пользователь не найден');
+      if (!users[currentUser] || users[currentUser].adminLevel !== 5)
+        return alert('Нет прав');
+      if (level < 1 || level > 4) return alert('Неверный уровень (1-4)');
+      users[id].adminLevel = level;
+      save();
+      alert(`Пользователю ${users[id].name} выдан уровень ${level}`);
+    }
+
+    function openRequestForm(cost, itemName) {
+      if (!currentUser || !users[currentUser]) return alert('Сначала зарегистрируйтесь');
+      if (users[currentUser].coins < cost) return alert('Недостаточно коинов');
+      selectedRequest = { cost, itemName };
+      document.getElementById('requestForm').classList.remove('hidden');
+    }
+
+    function submitRequest() {
+      const nick = document.getElementById('nick').value.trim();
+      const server = document.getElementById('server').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      if (!nick || !server || !contact) return alert('Заполните все поля формы');
+      users[currentUser].coins -= selectedRequest.cost;
+      pendingRequests.push({
+        user: users[currentUser].name,
+        id: currentUser,
+        type: selectedRequest.itemName,
+        nick,
+        server,
+        contact,
+      });
+      document.getElementById('requestForm').classList.add('hidden');
+      updateProfile();
+      save();
+      alert('Заявка отправлена');
+    }
+
+    function loadRequests() {
+      const list = document.getElementById('requestsList');
+      list.innerHTML = '';
+      pendingRequests.forEach((req) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${req.type}</strong> от ${req.user} (ID: ${req.id})<br>Ник: ${req.nick}<br>Сервер: ${req.server}<br>Контакт: ${req.contact}`;
+        list.appendChild(li);
+      });
+    }
+
+    // Поиск ID по нику в админ-панели
+    function findIdByNick() {
+      const nick = document.getElementById('searchNick').value.trim();
+      const resultElem = document.getElementById('searchResult');
+      if (!nick) {
+        resultElem.textContent = 'Введите ник для поиска.';
+        return;
+      }
+      const entry = Object.entries(users).find(
+        ([id, u]) => u.name.toLowerCase() === nick.toLowerCase()
+      );
+      if (entry) {
+        const [id, user] = entry;
+        resultElem.textContent = `Пользователь "${user.name}" имеет ID: ${id}`;
+      } else {
+        resultElem.textContent = 'Пользователь с таким ником не найден.';
+      }
+    }
+
+    if (currentUser && users[currentUser]) {
+      updateProfile();
+    }
+    showPage('main');
   </script>
 </body>
 </html>
